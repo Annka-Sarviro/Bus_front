@@ -1,0 +1,24 @@
+{
+  "email": "E-mail",
+  "forgot_pass": "Forgot your password?",
+  "login_email": "Sign in with your email address",
+  "pass": "Password",
+  "phone": "Phone",
+  "reg_link": "Don't have an account? Sign up",
+  "service_help": "With the help of the service",
+  "pages": [
+    { "id": 1, "name": "home", "title": "Home", "path": "/" },
+    { "id": 2, "name": "about_us", "title": "About us", "path": "/about" },
+
+    { "id": 7, "name": "contact", "title": "Contacts", "path": "/contact" }
+  ],
+  "registration": "Sign up",
+  "sign_in": "Sign in",
+  "sign_out": "Sign out",
+
+  "snack_bar": {
+    "error": "Incorrect password or username",
+    "server_error": "Something went wrong. Please try again later",
+    "success": "Login successful"
+  }
+}

@@ -1,0 +1,16 @@
+.content {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  justify-content: center;
+  background-color: #fff;
+  width: 100% !important;
+  height: auto;
+  border-radius: 4px;
+  margin-top: -118px;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.15);
+}
+
+.wrapper {
+  width: 100%;
+}

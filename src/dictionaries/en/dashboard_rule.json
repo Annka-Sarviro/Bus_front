@@ -1,0 +1,33 @@
+{
+  "rule": "Rule",
+  "back": "Back",
+
+  "form": {
+    "errors": {
+      "size": "The file must not exceed (5 MB)",
+      "formats": "Only the following formats are supported: .jpeg, .jpg, .png, .webp",
+      "title_more60": "The title must not contain more than 60 characters",
+      "text_more60": "The text must not contain more than 60 characters",
+      "alt_more30": "ALT must not contain more than 30 characters"
+    },
+    "text": {
+      "h1": "Heading level 1 (H1)",
+      "label": "Enter text",
+      "description": "Additional text description",
+      "alt": "Additional text (ALT)",
+      "banner": "Background banner",
+      "title1": "Title of the first block",
+      "text1": "Text of the first block",
+      "title2": "Title of the second block",
+      "text2": "Text of the second block"
+    },
+    "save_btn": {
+      "text": "Save"
+    }
+  },
+  "snackBar": {
+    "success": "Your changes have been saved",
+    "error": "Save error"
+  },
+  "preview": "Preview"
+}
