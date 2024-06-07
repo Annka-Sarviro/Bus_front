@@ -38,7 +38,6 @@ export default async function Home({
   const staticData = await getMainDictionaries(lang);
   const defaultImg = "/images/main_bg_default.jpg";
 
-  console.log(banner);
   return (
     <>
       <Hero
@@ -48,8 +47,7 @@ export default async function Home({
         staticData={staticData}
       />
       <Wrapper>
-        <>main</>
-        {/* <MainSection staticData={staticData} lang={lang} /> */}
+        <MainSection staticData={staticData} lang={lang} />
       </Wrapper>
     </>
   );
