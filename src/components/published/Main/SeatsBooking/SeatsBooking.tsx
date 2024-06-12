@@ -45,7 +45,6 @@ export const SeatsBooking = ({
     addPassengers?: boolean;
     addPassClick?: any;
 }) => {
-    console.log(data);
     const getColor = (name: string) => {
         switch (name) {
             case 'available':

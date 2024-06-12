@@ -68,7 +68,7 @@ export const JourneyCard = ({
 }) => {
     const [expanded, setExpanded] = React.useState(false);
     const [isShowModal, setIsShowModal] = React.useState(false);
-    console.log('card', data);
+
     const currency = useCurrency(state => state.currency);
 
     const handleExpandClick = () => {
@@ -430,10 +430,10 @@ export const JourneyCard = ({
                                             {data?.rout?.stops?.length > 0 &&
                                                 data.rout.stops
                                                     ?.filter(stop => stop.is_stop)
-                                                    .map(stop => {
+                                                    .map((stop, ind) => {
                                                         return (
                                                             <Box
-                                                                key={stop.id}
+                                                                key={stop.id || ind}
                                                                 component={'li'}
                                                                 display={'flex'}
                                                                 columnGap={1}

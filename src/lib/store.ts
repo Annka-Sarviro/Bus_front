@@ -10,7 +10,7 @@ export interface PopularState {
 }
 
 export interface CurrencyState {
-    currency: string;
+    selectCurrency: string;
     setCurrency: (el: string) => void;
     course_USD: () => Promise<void>;
     course_UAH: () => Promise<void>;
@@ -23,7 +23,7 @@ const usePopular = create<PopularState>(set => ({
 }));
 
 const useCurrency = create<CurrencyState>(set => ({
-    currency: 'EUR',
+    selectCurrency: 'EUR',
     setCurrency: (el: string) => set(state => ({ ...state, currency: el })),
 
     course_USD: async () => {

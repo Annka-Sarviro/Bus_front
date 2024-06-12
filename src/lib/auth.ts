@@ -17,21 +17,19 @@ interface AdminProps {
 }
 
 export async function login(values: LoginProps) {
-    const response = await axios.post<IToken>(
-        `${process.env.NEXT_PUBLIC_BASE_URL}auth/jwt/create/`,
-        {
-            headers: {
-                'TopContent-Type': 'application/json',
-            },
-            email: values.email,
-            password: values.password,
-        }
-    );
+    const response = await axios.post<IToken>(`${process.env.NEXT_PUBLIC_BACK_URL}auth/login/`, {
+        headers: {
+            'TopContent-Type': 'application/json',
+        },
+        email: values.email,
+        password: values.password,
+    });
 
     const expires = new Date(Date.now() + 1000 * 10000);
+
     const session = {
-        access: response.data.access_token,
-        refresh: response.data.refresh_token,
+        access: response.data.token.access_token,
+        refresh: response.data.token.refresh_token,
     };
     const sessionDataString = JSON.stringify(session);
     cookies().set('session', sessionDataString, { expires, httpOnly: true });
@@ -39,6 +37,11 @@ export async function login(values: LoginProps) {
 }
 
 export async function logout() {
+    const response = await axios.post<IToken>(`${process.env.NEXT_PUBLIC_BACK_URL}auth/login/`, {
+        headers: {
+            'TopContent-Type': 'application/json',
+        },
+    });
     cookies().set('session', '', { expires: new Date(0) });
 }
 
@@ -71,14 +74,14 @@ export async function getSession() {
 //   }
 // }
 
-export async function getAdminStatus() {
+export async function getUserStatus() {
     const session = cookies().get('session')?.value;
     if (!session) return null;
     try {
         const access = JSON.parse(session).access;
 
-        const { data } = await axios.get<AdminProps>(
-            `${process.env.NEXT_PUBLIC_BASE_URL}uk/api/admin`,
+        const { data } = await axios.get<string>(
+            `${process.env.NEXT_PUBLIC_BACK_URL}/user/current?status=getStatus`,
             {
                 headers: {
                     'Content-Type': 'application/json',
@@ -87,10 +90,10 @@ export async function getAdminStatus() {
             }
         );
 
-        return data.results[0].is_superuser;
+        return data;
     } catch (error) {
         console.log(error);
-        return false;
+        return '';
     }
 }
 
@@ -100,15 +103,12 @@ export async function getUserInfo() {
     try {
         const access = JSON.parse(session).access;
 
-        const { data } = await axios.get<IUser>(
-            `${process.env.NEXT_PUBLIC_BASE_URL}/auth/users/me/`,
-            {
-                headers: {
-                    'Content-Type': 'application/json',
-                    Authorization: 'Bearer ' + access,
-                },
-            }
-        );
+        const { data } = await axios.get<IUser>(`${process.env.NEXT_PUBLIC_BACK_URL}user/current`, {
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: 'Bearer ' + access,
+            },
+        });
 
         return data;
     } catch (error) {

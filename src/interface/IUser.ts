@@ -1,15 +1,15 @@
-import { ITickets } from "@/interface/ITickets";
+import { ITickets } from '@/interface/ITickets';
 
 export interface IUser {
-  id?: string;
-  is_superuser: boolean;
-  first_name: string;
-  last_name: string;
-  status: "admin" | "worker" | "customer" | "user";
-  email: string;
-  birthday: string;
-  phone?: string;
-  tickets: ITickets[];
+    id?: string;
+    is_superuser: boolean;
+    first_name: string;
+    last_name: string;
+    status: 'admin' | 'worker' | 'customer' | 'user';
+    email: string;
+    birthday: string;
+    phone?: string;
+    tickets: ITickets[];
 }
 
 // export interface IProfile {
@@ -37,6 +37,8 @@ export interface IUser {
 // }
 
 export interface IToken {
-  access_token: string;
-  refresh_token: string;
+    token: {
+        access_token: string;
+        refresh_token: string;
+    };
 }
