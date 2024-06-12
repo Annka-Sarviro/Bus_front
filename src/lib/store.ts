@@ -1,6 +1,7 @@
 import { currency } from '@/helpers/getCurrency';
 import axios from 'axios';
 import { create } from 'zustand';
+import { devtools } from 'zustand/middleware';
 
 export interface PopularState {
     selectRoutsTo: string;
@@ -12,8 +13,10 @@ export interface PopularState {
 export interface CurrencyState {
     selectCurrency: string;
     setCurrency: (el: string) => void;
-    course_USD: () => Promise<void>;
-    course_UAH: () => Promise<void>;
+    courseUSD?: number;
+    courseUAH?: number;
+    fetchCourseUSD: () => Promise<void>;
+    fetchCourseUAH: () => Promise<void>;
 }
 const usePopular = create<PopularState>(set => ({
     selectRoutsTo: '',
@@ -24,14 +27,15 @@ const usePopular = create<PopularState>(set => ({
 
 const useCurrency = create<CurrencyState>(set => ({
     selectCurrency: 'EUR',
-    setCurrency: (el: string) => set(state => ({ ...state, currency: el })),
+    setCurrency: (el: string) => set(state => ({ ...state, selectCurrency: el })),
 
-    course_USD: async () => {
+    fetchCourseUSD: async () => {
         try {
             const response = await axios.get(
-                `${process.env.NEXT_PUBLIC_BACK_URL}/variable/rate_euro_to_uah`
+                `${process.env.NEXT_PUBLIC_BACK_URL}/variable?variable_name=rate_euro_to_usd`
             );
-            const data = response.data.data.rate_euro_to_uah;
+
+            const data = response.data.data.rate_euro_to_usd; // Corrected the rate key
 
             set(state => ({
                 ...state,
@@ -41,16 +45,17 @@ const useCurrency = create<CurrencyState>(set => ({
             console.error('Failed to fetch currency rate:', error);
         }
     },
-    course_UAH: async () => {
+
+    fetchCourseUAH: async () => {
         try {
             const response = await axios.get(
-                `${process.env.NEXT_PUBLIC_BACK_URL}/variable/rate_euro_to_usd`
+                `${process.env.NEXT_PUBLIC_BACK_URL}/variable?variable_name=rate_euro_to_uah`
             );
             const data = response.data.data.rate_euro_to_uah;
 
             set(state => ({
                 ...state,
-                course_UAH: data,
+                courseUAH: data,
             }));
         } catch (error) {
             console.error('Failed to fetch currency rate:', error);

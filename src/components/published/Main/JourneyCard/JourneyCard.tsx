@@ -39,6 +39,7 @@ import { useCurrency } from '@/lib/store';
 import { getTimeDuration } from '@/helpers/getTimeDuration';
 import { getCurrency } from '@/helpers/getCurrency';
 import { BusService } from '@/components/common/BusService';
+import { getPrice } from '@/helpers/getPrice';
 
 interface ExpandMoreProps extends IconButtonProps {
     expand: boolean;
@@ -69,7 +70,18 @@ export const JourneyCard = ({
     const [expanded, setExpanded] = React.useState(false);
     const [isShowModal, setIsShowModal] = React.useState(false);
 
-    const currency = useCurrency(state => state.currency);
+    const selectCurrency = useCurrency(state => state.selectCurrency);
+    const fetchCourseUSD = useCurrency(state => state.fetchCourseUSD);
+    const fetchCourseUAH = useCurrency(state => state.fetchCourseUAH);
+
+    React.useEffect(() => {
+        const fetchRates = async () => {
+            await fetchCourseUSD();
+            await fetchCourseUAH();
+        };
+
+        fetchRates();
+    }, [fetchCourseUSD, fetchCourseUAH]);
 
     const handleExpandClick = () => {
         setExpanded(!expanded);
@@ -254,7 +266,7 @@ export const JourneyCard = ({
                                                 fontWeight={'700'}
                                                 sx={{ fontSize: { xs: '19px', sm: '24px' } }}
                                             >
-                                                {data?.rout?.to_place?.price}
+                                                {getPrice(data?.rout?.to_place?.price)}
                                             </Typography>
                                             <Typography
                                                 color={'primary'}
@@ -262,7 +274,7 @@ export const JourneyCard = ({
                                                 display={'flex'}
                                                 sx={{ fontSize: { xs: '19px', sm: '24px' } }}
                                             >
-                                                {currency}
+                                                {selectCurrency}
                                             </Typography>
                                         </Box>
                                     </Box>
