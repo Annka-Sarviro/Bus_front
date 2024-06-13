@@ -249,7 +249,7 @@ export const NavBarAdmin = ({
                                     margin: 0,
                                     padding: 0,
                                     color: 'white',
-                                    '&:hover': { color: '#c9c9c9' },
+                                    '&:hover': { color: theme.customColors.grey_light },
                                 }}
                             >
                                 <MenuIcon />

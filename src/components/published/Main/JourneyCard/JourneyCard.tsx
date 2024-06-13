@@ -69,7 +69,7 @@ export const JourneyCard = ({
 }) => {
     const [expanded, setExpanded] = React.useState(false);
     const [isShowModal, setIsShowModal] = React.useState(false);
-
+    console.log(data);
     const selectCurrency = useCurrency(state => state.selectCurrency);
     const fetchCourseUSD = useCurrency(state => state.fetchCourseUSD);
     const fetchCourseUAH = useCurrency(state => state.fetchCourseUAH);
@@ -126,7 +126,6 @@ export const JourneyCard = ({
                             >
                                 <Box>
                                     <Typography
-                                        color={'primary'}
                                         fontWeight={'700'}
                                         sx={{ fontSize: { xs: '19px', md: '24px' } }}
                                     >
@@ -144,7 +143,6 @@ export const JourneyCard = ({
                                 </Box>
                                 <Box>
                                     <Typography
-                                        color={'primary'}
                                         fontWeight={'700'}
                                         sx={{ fontSize: { xs: '19px', md: '24px' } }}
                                     >
@@ -183,8 +181,8 @@ export const JourneyCard = ({
                                 item
                                 xs={8}
                                 sm={3}
-                                md={4}
-                                lg={4}
+                                md={3}
+                                lg={3}
                                 display={'flex'}
                                 sx={{
                                     justifyContent: 'space-between',
@@ -194,7 +192,6 @@ export const JourneyCard = ({
                             >
                                 <Box>
                                     <Typography
-                                        color={'primary'}
                                         fontWeight={'700'}
                                         sx={{ fontSize: { xs: '19px', md: '24px' } }}
                                     >
@@ -215,7 +212,6 @@ export const JourneyCard = ({
                                 </Box>
                                 <Box>
                                     <Typography
-                                        color={'primary'}
                                         fontWeight={'700'}
                                         sx={{ fontSize: { xs: '19px', md: '24px' } }}
                                     >
@@ -224,7 +220,7 @@ export const JourneyCard = ({
                                     <Box display={'flex'} columnGap={1}>
                                         <Typography
                                             sx={{
-                                                fontSize: { xs: '10px', md: '12px' },
+                                                fontSize: { xs: '10px', md: '14px' },
                                             }}
                                         >
                                             {data?.rout?.to_place?.city?.address}
@@ -300,7 +296,7 @@ export const JourneyCard = ({
                     <CardActions
                         disableSpacing
                         sx={{
-                            bgcolor: '#E5E5E5',
+                            bgcolor: 'secondary.light',
                             px: 3,
                             py: '10px',
                             display: 'flex',
@@ -319,7 +315,7 @@ export const JourneyCard = ({
                                 component={'span'}
                                 sx={{ fontSize: { xs: '13px', md: '16px' } }}
                             >
-                                {data.rout.id}
+                                {data.rout._id}
                             </Typography>
                         </Box>
                         {data?.bus?.busIdService.length > 0 && (
@@ -346,8 +342,12 @@ export const JourneyCard = ({
                             }}
                         >
                             <Typography
-                                color={theme.palette.secondary.main}
-                                sx={{ fontSize: { xs: '13px', md: '16px' } }}
+                                sx={{
+                                    fontSize: { xs: '13px', md: '16px' },
+                                    textDecoration: 'underline',
+                                    textDecorationColor: theme.palette.primary.dark,
+                                    textUnderlineOffset: '4px',
+                                }}
                             >
                                 {staticData.routs_card.read_more_btn.title}
                             </Typography>
@@ -356,7 +356,7 @@ export const JourneyCard = ({
                                 onClick={handleExpandClick}
                                 aria-expanded={expanded}
                                 aria-label="show more"
-                                sx={{ py: 0, color: '#404040' }}
+                                sx={{ py: 0, color: 'primary.dark' }}
                             >
                                 <ExpandMoreIcon />
                             </ExpandMore>
@@ -555,9 +555,12 @@ export const JourneyCard = ({
                                                 href={`/${lang}${staticData.routs_card.cancellation_info.href}`}
                                             >
                                                 <Typography
-                                                    color={theme.palette.secondary.main}
+                                                    color={'primary.main'}
                                                     sx={{
                                                         fontSize: { xs: '13px', md: '16px' },
+                                                        textDecoration: 'underline',
+                                                        textDecorationColor: 'primary.main',
+                                                        textUnderlineOffset: '4px',
                                                     }}
                                                 >
                                                     {staticData.routs_card.cancellation_info.title}

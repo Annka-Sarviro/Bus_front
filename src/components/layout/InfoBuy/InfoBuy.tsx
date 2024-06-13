@@ -25,12 +25,7 @@ export function InfoBuy({ staticData, lang }: { staticData: infoBuyStaticDataPro
                     <Grid mt={6} container>
                         <Grid item>
                             <Box>
-                                <Typography
-                                    color={'primary'}
-                                    fontSize={32}
-                                    fontWeight={700}
-                                    variant={'h2'}
-                                >
+                                <Typography fontSize={32} fontWeight={700} variant={'h2'}>
                                     {staticData.title}
                                 </Typography>
                             </Box>
@@ -42,7 +37,7 @@ export function InfoBuy({ staticData, lang }: { staticData: infoBuyStaticDataPro
                                 justifyContent={'space-between'}
                             >
                                 <Grid item sm={12} md={4} lg={4} xl={4}>
-                                    <Card className={Style.card}>
+                                    <Card className={Style.card} sx={{ bgcolor: 'primary.light' }}>
                                         <Stack
                                             className={cn(Style.r, Style.c, Style.lg__title)}
                                             spacing={1}
@@ -69,7 +64,14 @@ export function InfoBuy({ staticData, lang }: { staticData: infoBuyStaticDataPro
                                     </Card>
                                 </Grid>
                                 <Grid item sm={12} md={4} lg={4} xl={4}>
-                                    <Card className={Style.card}>
+                                    <Card
+                                        className={Style.card}
+                                        sx={{
+                                            bgcolor: 'primary.light',
+                                            width: '100%',
+                                            justifyContent: 'space-between',
+                                        }}
+                                    >
                                         <Stack
                                             className={cn(Style.r, Style.c, Style.lg__title)}
                                             spacing={1}
@@ -95,7 +97,7 @@ export function InfoBuy({ staticData, lang }: { staticData: infoBuyStaticDataPro
                                     </Card>
                                 </Grid>
                                 <Grid item sm={12} md={4} lg={4} xl={4}>
-                                    <Card className={Style.card}>
+                                    <Card className={Style.card} sx={{ bgcolor: 'primary.light' }}>
                                         <Stack
                                             className={cn(Style.r, Style.c, Style.lg__title)}
                                             spacing={1}

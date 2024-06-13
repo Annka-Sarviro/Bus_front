@@ -184,7 +184,7 @@ export function DashboardNavBar({
                             position: 'absolute',
                             top: 2,
                             right: 2,
-                            '&:hover': { color: '#c9c9c9' },
+                            '&:hover': { color: theme.customColors.grey_light },
                         }}
                     >
                         <CloseIcon />

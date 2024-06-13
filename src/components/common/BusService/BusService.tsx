@@ -1,12 +1,10 @@
-import { Box, Stack, Typography } from '@mui/material';
-import { grey } from '@mui/material/colors';
+import { Box, Stack } from '@mui/material';
 import React, { useMemo } from 'react';
 
 import { ServicersBus } from '@/components/common/BusService/ServicersBus';
 import { IBus } from '@/interface/IBus';
+import theme from '@/theme';
 
-const color = grey[700];
-const colorIcon = grey[800];
 interface IServiceBus {
     name: string;
     component: JSX.Element;
@@ -38,17 +36,16 @@ export const BusService = ({ busIdService }: { busIdService: string[] }) => {
             {busIdService?.length ? (
                 <Stack
                     direction={'row'}
-                    spacing={0.5}
+                    spacing={1}
                     justifyContent={'flex-start'}
                     alignItems={'center'}
                 >
                     {data.map(item => (
                         <Box
-                            sx={{
-                                color: colorIcon,
-                            }}
                             display={'flex'}
                             key={item.name}
+                            alignItems={'center'}
+                            justifyContent={'center'}
                         >
                             {item.component}
                         </Box>

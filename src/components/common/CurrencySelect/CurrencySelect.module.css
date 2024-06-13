@@ -1,20 +1,20 @@
 .arrow {
-  transform: rotate(0deg);
-  transition: all 0.3s;
+    transform: rotate(0deg);
+    transition: all 0.3s;
 }
 
 .active {
-  transition: all 0.3s;
-  transform: rotate(180deg);
+    transition: all 0.3s;
+    transform: rotate(180deg);
 }
 
 .List_hover :hover {
-  color: #c9c9c9;
-  transition: color 0.3s ease-out;
+    color: var(--grey_light);
+    transition: color 0.3s ease-out;
 }
 
 .List_hover:hover > .arrow {
-  color: #c9c9c9;
-  transition: color 0.3s ease-out;
+    color: var(--grey_light);
+    transition: color 0.3s ease-out;
 }
 /*# sourceMappingURL=CurrencySelect.module.css.map */

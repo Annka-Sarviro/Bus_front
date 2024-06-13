@@ -124,11 +124,14 @@ export const SearchRoutForm = ({
                                 fontWeight: '400',
                                 textTransform: 'none',
                                 fontSize: '16px',
+                                '&:hover': {
+                                    bgcolor: 'primary.light',
+                                },
                             }}
                             startIcon={<AiOutlineSearch />}
                             fullWidth
                             variant={'contained'}
-                            color={'secondary'}
+                            color={'primary'}
                             onClick={Search}
                             disabled={values.to === '' || values.from === ''}
                         >

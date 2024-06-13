@@ -64,7 +64,7 @@ export const MobileNavMenu = ({
         <Box
             sx={{
                 height: '100vh',
-                width: { xs: '100vw', md: '200px' },
+                width: { xs: '100vw', md: '250px' },
                 marginX: 'auto',
             }}
             role="presentation"
@@ -84,7 +84,7 @@ export const MobileNavMenu = ({
                     position: 'absolute',
                     top: 2,
                     right: 2,
-                    '&:hover': { color: '#c9c9c9' },
+                    '&:hover': { color: theme.customColors.grey_light },
                 }}
             >
                 <CloseIcon />
@@ -177,7 +177,7 @@ export const MobileNavMenu = ({
                                         sx={{
                                             paddingX: '32px',
                                             paddingY: '16px',
-                                            backgroundColor: '#091E39',
+                                            backgroundColor: theme.customColors.primary_super_dark,
                                             margin: 0,
                                             minHeight: 'initial',
                                         }}
@@ -299,14 +299,17 @@ export const MobileNavMenu = ({
                                             {staticData.sign_in}
                                         </Button>
                                     </Link>
-                                    <Link href={'/auth/registration'}>
+                                    <Link href={`/${lang}/auth/registration`}>
                                         <Button
                                             component={'span'}
-                                            color={'secondary'}
                                             sx={{
                                                 fontWeight: '400',
                                                 minWidth: '106px',
                                                 textTransform: 'none',
+                                                bgcolor: 'primary',
+                                                '&:hover': {
+                                                    bgcolor: 'primary.light',
+                                                },
                                             }}
                                             variant={'contained'}
                                         >
@@ -403,8 +406,8 @@ export const MobileNavMenu = ({
                     <AccordionDetails
                         sx={{
                             paddingX: '32px',
-                            paddingY: '16px',
-                            backgroundColor: '#091E39',
+                            // paddingY: '16px',
+                            backgroundColor: theme.customColors.primary_super_dark,
                             margin: 0,
                             minHeight: 'initial',
                         }}

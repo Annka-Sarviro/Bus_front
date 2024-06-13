@@ -1,32 +1,32 @@
 .navbar {
-  height: 64px;
-  justify-content: center;
+    height: 64px;
+    justify-content: center;
 }
 
 .navbar .navbar_open {
-  width: calc(100% - 200px);
-  margin-left: 200px;
-  transition: all ease-out;
-  transition-duration: 0.2s;
+    width: calc(100% - 200px);
+    margin-left: 200px;
+    transition: all ease-out;
+    transition-duration: 0.2s;
 }
 
 .navbar .navbar__text {
-  text-transform: none;
+    text-transform: none;
 }
 
 .navbar .arrow {
-  transform: rotate(0deg);
-  transition: all 0.3s;
+    transform: rotate(0deg);
+    transition: all 0.3s;
 }
 
 .navbar .active {
-  transition: all 0.3s;
-  transform: rotate(180deg);
+    transition: all 0.3s;
+    transform: rotate(180deg);
 }
 
 .navbar .List_hover :hover,
 .navbar .navbar__text:hover,
 .List_hover:hover > .arrow {
-  color: #c9c9c9;
-  transition: color 0.3s ease-out;
+    color: var(--grey_light);
+    transition: color 0.3s ease-out;
 }

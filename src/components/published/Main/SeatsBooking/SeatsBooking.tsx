@@ -26,8 +26,6 @@ import BusConstructor from '@/components/common/BusConstructor/BusConstructor';
 import BusSeats from '../../../common/BusSeats/BusSeats';
 import { ISeat } from '@/interface/ISeat';
 
-const color_title = grey[800];
-
 export const SeatsBooking = ({
     data,
     onClose,
@@ -48,13 +46,13 @@ export const SeatsBooking = ({
     const getColor = (name: string) => {
         switch (name) {
             case 'available':
-                return '#7ADB6A';
+                return theme.palette.success.main;
             case 'occupied':
-                return '#BFBFBF';
+                return theme.customColors.grey_light;
             case 'selected':
-                return '#296FCA';
+                return theme.palette.primary.main;
             default:
-                return '#BFBFBF';
+                return theme.customColors.grey_light;
         }
     };
 
@@ -163,49 +161,6 @@ export const SeatsBooking = ({
         return pathWithParams;
     };
 
-    const BpIcon = styled('span')(({ theme }: { theme: any }) => ({
-        borderRadius: '4px',
-        width: '56px',
-        height: '53px',
-        backgroundColor: theme.palette.success.main,
-        border: '1px #BFBFBF solid',
-
-        '.Mui-focusVisible &': {
-            outline: '2px auto rgba(19,124,189,.6)',
-            outlineOffset: 2,
-        },
-        'input:hover ~ &': {
-            backgroundColor: theme.palette.secondary.main,
-        },
-        'input:disabled ~ &': {
-            backgroundColor: '#BFBFBF',
-        },
-    }));
-
-    const BpCheckedIcon = styled(BpIcon)({
-        backgroundColor: '#137cbd',
-
-        'input:hover ~ &': {
-            backgroundColor: theme.palette.secondary.main,
-        },
-    });
-
-    function BpCheckbox(props: CheckboxProps) {
-        return (
-            <Checkbox
-                sx={{
-                    '&:hover': { bgcolor: 'transparent' },
-                }}
-                disableRipple
-                color="default"
-                checkedIcon={<BpCheckedIcon />}
-                icon={<BpIcon />}
-                inputProps={{ 'aria-label': 'Checkbox demo' }}
-                {...props}
-            />
-        );
-    }
-
     return (
         <JourneySeatsBookingModal onClose={onClose} isShowModal={isShowModal}>
             <Box sx={{ overflowY: 'scroll', height: { xs: '94vh', md: 'auto' } }}>
@@ -243,7 +198,6 @@ export const SeatsBooking = ({
                                 fontWeight: 700,
                                 fontSize: '29px',
                                 lineHeight: '140%',
-                                color: color_title,
                             }}
                         >
                             {staticData.seat_booking.title}
@@ -274,7 +228,13 @@ export const SeatsBooking = ({
                                                 width: 24,
                                                 height: 24,
                                                 borderRadius: '4px',
-                                                backgroundColor: getColor(el.name),
+                                                backgroundColor:
+                                                    el.name === 'occupied'
+                                                        ? 'white'
+                                                        : getColor(el.name),
+                                                borderColor: getColor(el.name),
+                                                borderWidth: '0.5px',
+                                                borderStyle: 'solid',
                                             }}
                                         />
                                     </Box>
@@ -302,7 +262,6 @@ export const SeatsBooking = ({
                                     fontStyle: 'normal',
                                     fontSize: '20px',
                                     lineHeight: '140%',
-                                    color: color_title,
                                 }}
                             >
                                 {data?.rout?.from_place?.city?.title}
@@ -314,7 +273,6 @@ export const SeatsBooking = ({
                                     fontStyle: 'normal',
                                     fontSize: '20px',
                                     lineHeight: '140%',
-                                    color: color_title,
                                 }}
                             >
                                 {data?.rout?.to_place?.city?.title}
@@ -322,10 +280,7 @@ export const SeatsBooking = ({
 
                             <CalendarIcon width={'24px'} height={'24px'} />
 
-                            <Typography
-                                color={'primary'}
-                                sx={{ fontSize: { xs: '13px', md: '20px' } }}
-                            >
+                            <Typography sx={{ fontSize: { xs: '13px', md: '20px' } }}>
                                 {data?.departure_date
                                     ? dayjs(data?.departure_date).format('DD.MM.YYYY')
                                     : dayjs().format('DD.MM.YYYY')}
@@ -350,12 +305,15 @@ export const SeatsBooking = ({
                                 sx={{
                                     minHeight: 'auto',
                                     mb: 2,
+                                    color: `primary.dark`,
                                     '& .MuiTabs-indicator': {
                                         display: 'none',
+                                        color: `${theme.palette.primary.dark}`,
                                     },
 
                                     '& .Mui-selected': {
                                         backgroundColor: `${theme.palette.info.main}`,
+                                        color: `${theme.palette.primary.dark}`,
                                     },
                                     '& .MuiTab-root': {
                                         px: 1,
@@ -365,6 +323,7 @@ export const SeatsBooking = ({
                                         minWidth: '60px',
                                         borderRadius: '4px',
                                         textTransform: 'none',
+                                        color: 'primary.dark',
                                     },
                                 }}
                             >
@@ -430,6 +389,12 @@ export const SeatsBooking = ({
                                 fontWeight: '400',
                                 textTransform: 'none',
                                 fontSize: { sm: '16px', lg: '20px' },
+                                color: theme.customColors.grey_black,
+
+                                '&:hover': {
+                                    bgcolor: 'transparent',
+                                    color: 'primary.dark',
+                                },
                             }}
                             variant={'text'}
                             onClick={onClose}

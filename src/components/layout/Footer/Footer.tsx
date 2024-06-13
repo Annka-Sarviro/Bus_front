@@ -13,14 +13,18 @@ import Link from 'next/link';
 import React from 'react';
 import { BiSupport } from 'react-icons/bi';
 import { BsFacebook } from 'react-icons/bs';
+import { FaWhatsapp } from 'react-icons/fa';
 import { FaViber } from 'react-icons/fa';
 import { TbBrandTelegram } from 'react-icons/tb';
 
 import Logo from '../../../../public/logo_white.svg';
+import SupportSvg from '../../../../public/icons/support.svg';
+
 import Style from './Footer.module.css';
 import { footerStaticDataProp } from '@/interface/IStaticData';
 import { Locale } from '@/i18n.config';
 import { IPhone } from '@/interface/IContact';
+import { LocaleChange } from '@/components/common/LocaleChange';
 
 export const Footer = async ({
     staticData,
@@ -32,7 +36,13 @@ export const Footer = async ({
     contacts: IPhone[];
 }) => {
     return (
-        <Box className={Style.content} component={'footer'}>
+        <Box
+            className={Style.content}
+            component={'footer'}
+            sx={{
+                bgcolor: 'primary.dark',
+            }}
+        >
             <Container maxWidth={'xl'}>
                 <Box className={Style.wrapper}>
                     <Box mt={4}>
@@ -42,20 +52,32 @@ export const Footer = async ({
                             flexDirection={'row'}
                             justifyContent={'space-between'}
                         >
-                            <Grid lg={2} xl={2} item>
+                            <Grid lg={1} xl={1} item>
                                 <Link href={`/${lang}/`}>
                                     <Logo width={90} height={90} aria-label={'logo'} />
                                 </Link>
+                                <LocaleChange lang={lang} flag={false} />
                             </Grid>
-                            <Grid lg={2} xl={2} item>
+                            <Grid xs={4} lg={8} xl={8} item>
                                 <Typography color={'white'} className={Style.title} variant={'h2'}>
                                     {staticData.nav}
                                 </Typography>
                                 <Box component={'nav'}>
-                                    <List>
+                                    <List
+                                        sx={{
+                                            display: 'flex',
+                                            flexWrap: 'wrap',
+                                            flexDirection: { xs: 'column', md: 'row' },
+                                            columnGap: 2,
+                                        }}
+                                    >
                                         {staticData.navigate.map(list => (
                                             <ListItem
-                                                sx={{ marginTop: '8px' }}
+                                                sx={{
+                                                    marginTop: '8px',
+                                                    display: 'inline-block',
+                                                    width: 'fit-content',
+                                                }}
                                                 key={list.id}
                                                 disablePadding
                                             >
@@ -76,17 +98,136 @@ export const Footer = async ({
                                         ))}
                                     </List>
                                 </Box>
+                                <Box sx={{ display: { xs: 'none', md: 'block' } }}>
+                                    <List
+                                        sx={{
+                                            display: 'flex',
+                                            flexWrap: 'wrap',
+                                            justifyContent: 'start',
+                                            columnGap: 2,
+                                        }}
+                                    >
+                                        {staticData.official.map(list => (
+                                            <ListItem
+                                                key={list.id}
+                                                disablePadding
+                                                sx={{
+                                                    width: 'fit-content',
+                                                }}
+                                            >
+                                                <Link href={`/${lang}${list.path}`}>
+                                                    <ListItemText
+                                                        className={Style.List_hover}
+                                                        primaryTypographyProps={{
+                                                            color: '#fff',
+                                                            fontSize: '14px',
+                                                            lineHeight: '15px',
+                                                            fontWeight: '400',
+                                                        }}
+                                                        primary={list.title}
+                                                    />
+                                                </Link>
+                                            </ListItem>
+                                        ))}
+                                    </List>
+                                </Box>
                             </Grid>
+
                             <Grid lg={2} xl={2} item>
                                 <Typography color={'white'} className={Style.title} variant={'h2'}>
-                                    {staticData.cooperation}
+                                    <Stack spacing={1} direction={'row'} alignItems={'center'}>
+                                        <SupportSvg width={21} height={20} />
+                                        <span>{staticData.support}</span>
+                                    </Stack>
                                 </Typography>
-                                <List>
+                                <Box>
+                                    <List>
+                                        {contacts &&
+                                            contacts.map((el, ind) => (
+                                                <ListItem
+                                                    disablePadding
+                                                    className={Style.List_hover}
+                                                    key={ind}
+                                                    sx={{ fontSize: '16px', color: 'white' }}
+                                                >
+                                                    <Link
+                                                        href={`tel: ${el.phone_number}`}
+                                                        className={Style.phone_number}
+                                                    >
+                                                        {el.phone_number}
+                                                    </Link>
+                                                    {el.telegram && (
+                                                        <Link
+                                                            href={`https://t.me/+38${el.telegram}`}
+                                                            target="_blank"
+                                                            rel="noreferrer nofollow"
+                                                            className={Style.List_hover}
+                                                        >
+                                                            <IconButton sx={{ color: 'white' }}>
+                                                                <TbBrandTelegram
+                                                                    color={'inherit'}
+                                                                    size={24}
+                                                                />
+                                                            </IconButton>
+                                                        </Link>
+                                                    )}
+                                                    {el.viber && (
+                                                        <Link
+                                                            href={`viber://chat?number=+38${el.viber}`}
+                                                            target="_blank"
+                                                            rel="noreferrer nofollow"
+                                                            className={Style.List_hover}
+                                                        >
+                                                            <IconButton
+                                                                // className={Style.List_hover}
+                                                                sx={{ color: 'white' }}
+                                                            >
+                                                                <FaViber
+                                                                    color={'inherit'}
+                                                                    size={24}
+                                                                />
+                                                            </IconButton>
+                                                        </Link>
+                                                    )}
+                                                    {el.whats_up && (
+                                                        <Link
+                                                            href={`https://wa.me/+3${el.whats_up.replace(/\s/g, '')}`}
+                                                            target="_blank"
+                                                            rel="noreferrer nofollow"
+                                                            className={Style.List_hover}
+                                                        >
+                                                            <IconButton sx={{ color: 'white' }}>
+                                                                <FaWhatsapp
+                                                                    color={'inherit'}
+                                                                    size={24}
+                                                                />
+                                                            </IconButton>
+                                                        </Link>
+                                                    )}
+                                                </ListItem>
+                                            ))}
+                                    </List>
+                                </Box>
+                            </Grid>
+                        </Grid>
+                    </Box>
+                    <Box>
+                        <Box>
+                            <Box sx={{ display: { xs: 'block', md: 'none' } }}>
+                                <List
+                                    sx={{
+                                        display: 'flex',
+                                        justifyContent: 'center',
+                                        columnGap: 2,
+                                    }}
+                                >
                                     {staticData.official.map(list => (
                                         <ListItem
-                                            sx={{ marginTop: '8px' }}
                                             key={list.id}
                                             disablePadding
+                                            sx={{
+                                                width: 'fit-content',
+                                            }}
                                         >
                                             <Link href={`/${lang}${list.path}`}>
                                                 <ListItemText
@@ -95,7 +236,6 @@ export const Footer = async ({
                                                         color: '#fff',
                                                         fontSize: '14px',
                                                         lineHeight: '15px',
-                                                        textTransform: 'uppercase',
                                                         fontWeight: '400',
                                                     }}
                                                     primary={list.title}
@@ -104,82 +244,8 @@ export const Footer = async ({
                                         </ListItem>
                                     ))}
                                 </List>
-                            </Grid>
-                            <Grid lg={2} xl={2} item>
-                                <Typography color={'white'} className={Style.title} variant={'h2'}>
-                                    <Stack spacing={1} direction={'row'} alignItems={'center'}>
-                                        <BiSupport size={28} color={'#FABA17'} />
-                                        <span>{staticData.support}</span>
-                                    </Stack>
-                                </Typography>
-                                <Box>
-                                    <List>
-                                        {contacts.map((list, ind) => (
-                                            <ListItem
-                                                sx={{ marginTop: '8px' }}
-                                                key={ind}
-                                                disablePadding
-                                            >
-                                                <Link href={`tel:${list.phone_number}`}>
-                                                    <ListItemText
-                                                        className={Style.List_hover}
-                                                        primaryTypographyProps={{
-                                                            color: '#fff',
-                                                            fontSize: '14px',
-                                                            lineHeight: '15px',
-                                                            textTransform: 'uppercase',
-                                                            fontWeight: '400',
-                                                        }}
-                                                        primary={list.phone_number}
-                                                    />
-                                                </Link>
-                                            </ListItem>
-                                        ))}
-                                    </List>
-                                    <Stack spacing={1} direction={'row'}>
-                                        {contacts && contacts[0]?.telegram && (
-                                            <Link
-                                                href={`https://t.me/+38${contacts[0].telegram.replace(/\s/g, '')}`}
-                                                target="_blank"
-                                                rel="noreferrer nofollow"
-                                            >
-                                                <IconButton className={Style.List_hover}>
-                                                    <TbBrandTelegram color={'white'} />
-                                                </IconButton>
-                                            </Link>
-                                        )}
-
-                                        {contacts[0]?.whats_up && (
-                                            <Link
-                                                href={`https://wa.me/+3${contacts[0].whats_up.replace(/\s/g, '')}`}
-                                                target="_blank"
-                                                rel="noreferrer nofollow"
-                                            >
-                                                <IconButton className={Style.List_hover}>
-                                                    <BsFacebook color={'white'} />
-                                                </IconButton>
-                                            </Link>
-                                        )}
-
-                                        {contacts[0]?.viber && (
-                                            <Link
-                                                href={`viber://chat?number=+38${contacts[0].viber.replace(/\s/g, '')}`}
-                                                target="_blank"
-                                                rel="noreferrer nofollow"
-                                            >
-                                                <IconButton className={Style.List_hover}>
-                                                    <FaViber color={'white'} />
-                                                </IconButton>
-                                            </Link>
-                                        )}
-                                    </Stack>
-                                </Box>
-                            </Grid>
-                        </Grid>
-                    </Box>
-                    <Box>
-                        <Box>
-                            <Divider color={'#0B356A'} />
+                            </Box>
+                            <Divider light sx={{ borderColor: 'primary.light', opacity: 0.4 }} />
                             <Box className={Style.copyright_content}>
                                 <Typography color={'white'} className={Style.copyright_text}>
                                     {staticData.copyright}

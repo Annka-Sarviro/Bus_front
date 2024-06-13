@@ -94,7 +94,7 @@ export function Input({
                                         py={0.5}
                                         px={1}
                                         borderRadius={1}
-                                        bgcolor={'#E5E5E5'}
+                                        bgcolor={'secondary.light'}
                                         onClick={() => handlePopRoutToClick(el)}
                                         sx={{ cursor: 'pointer' }}
                                     >
@@ -131,7 +131,7 @@ export function Input({
                                         py={0.5}
                                         px={1}
                                         borderRadius={1}
-                                        bgcolor={'#E5E5E5'}
+                                        bgcolor={'secondary.light'}
                                         sx={{ cursor: 'pointer' }}
                                         onClick={() => handlePopRoutFromClick(el)}
                                     >

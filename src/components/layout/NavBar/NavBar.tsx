@@ -40,7 +40,7 @@ import theme from '@/theme';
 import { MdDashboard } from 'react-icons/md';
 import { HiTicket } from 'react-icons/hi2';
 const drawerWidth = 250;
-const primary = theme.palette.primary.main;
+const primary = theme.palette.primary.light;
 
 export const NavBar = ({
     staticData,
@@ -80,7 +80,7 @@ export const NavBar = ({
     };
 
     return (
-        <AppBar color={'primary'} className={Style.navbar} position="fixed">
+        <AppBar sx={{ bgcolor: 'primary.dark' }} className={Style.navbar} position="fixed">
             <Toolbar disableGutters>
                 <Container maxWidth={'xl'}>
                     <Grid
@@ -306,14 +306,18 @@ export const NavBar = ({
                                                     {staticData.sign_in}
                                                 </Button>
                                             </Link>
-                                            <Link href={'/auth/registration'}>
+                                            <Link href={`/${lang}/auth/registration`}>
                                                 <Button
                                                     component={'span'}
-                                                    color={'secondary'}
+                                                    color={'primary'}
                                                     sx={{
                                                         fontWeight: '400',
                                                         minWidth: '131px',
                                                         textTransform: 'none',
+                                                        bgcolor: 'primary',
+                                                        '&:hover': {
+                                                            bgcolor: 'primary.light',
+                                                        },
                                                     }}
                                                     variant={'contained'}
                                                 >
@@ -340,7 +344,10 @@ export const NavBar = ({
                                 aria-haspopup="true"
                                 onClick={toggleDrawer(!open)}
                                 color="inherit"
-                                sx={{ color: 'white', '&:hover': { color: '#c9c9c9' } }}
+                                sx={{
+                                    color: 'white',
+                                    '&:hover': { color: theme.customColors.grey_light },
+                                }}
                             >
                                 <MenuIcon />
                             </IconButton>
@@ -353,7 +360,7 @@ export const NavBar = ({
                                     width: { xs: '100vw', sm: drawerWidth },
                                     flexShrink: 0,
                                     '& .MuiDrawer-paper': {
-                                        backgroundColor: primary,
+                                        backgroundColor: 'primary.dark',
                                         width: { xs: '100vw', md: drawerWidth },
                                         boxSizing: 'border-box',
                                     },

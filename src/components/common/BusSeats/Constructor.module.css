@@ -51,10 +51,10 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 1px solid #bfbfbf;
+    border: 1px solid var(--grey_black);
     border-radius: 4px;
     cursor: pointer;
-    color: #bfbfbf;
+    color: var(--grey_black);
     @media screen and ((min-width: 900px) and (max-width: 1199.98px)) {
         width: 45px;
         height: 42px;
@@ -77,7 +77,7 @@
 }
 
 .bus_seat:hover {
-    border: 2px solid #bfbfbf;
+    border: 2px solid var(--grey_black);
     font-size: 19px;
 }
 
@@ -118,14 +118,14 @@
     left: -43px;
     width: 80px;
     height: 35px;
-    border: 1px solid #bfbfbf;
+    border: 1px solid var(--grey_black);
     font-size: 12px;
     text-transform: capitalize;
     border-radius: 4px;
     display: flex;
     justify-content: center;
     align-items: center;
-    color: #bfbfbf;
+    color: var(--grey_black);
 }
 
 @media screen and (min-width: 900px) {
@@ -166,17 +166,17 @@
     }
 }
 .bus_seat.new {
-    background-color: #7adb6a;
+    background-color: var(--success_main);
     color: white;
 }
 
 .bus_seat.ordered {
-    background-color: #bfbfbf;
+    background-color: white;
     color: white;
 }
 
 .bus_seat.selected {
-    background-color: #296fca;
+    background-color: var(--primary_main);
     color: white;
 }
 
