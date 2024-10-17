@@ -25,6 +25,8 @@
     --grey_light: #d1d1d1;
     --grey_black: #8b8b8b;
     --layout: rgba(117, 209, 222, 0.8);
+
+    --box_shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 }
 
 @media (prefers-color-scheme: dark) {

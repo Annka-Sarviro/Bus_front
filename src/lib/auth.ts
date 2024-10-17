@@ -17,23 +17,41 @@ interface AdminProps {
 }
 
 export async function login(values: LoginProps) {
-    const response = await axios.post<IToken>(`${process.env.NEXT_PUBLIC_BACK_URL}auth/login/`, {
-        headers: {
-            'TopContent-Type': 'application/json',
-        },
-        email: values.email,
-        password: values.password,
-    });
+    const BACK_URL = `${process.env.NEXT_PUBLIC_BACK_URL}`;
+    7;
+    try {
+        const response = await axios.post<IToken>(
+            `${BACK_URL}auth/login`,
+            {
+                password: values.password,
+                email: values.email,
+            },
+            {
+                headers: {
+                    'Content-Type': 'application/json', // Исправлено на Content-Type
+                },
+            }
+        );
 
-    const expires = new Date(Date.now() + 1000 * 10000);
+        const expires = new Date(Date.now() + 1000 * 10000);
 
-    const session = {
-        access: response.data.token.access_token,
-        refresh: response.data.token.refresh_token,
-    };
-    const sessionDataString = JSON.stringify(session);
-    cookies().set('session', sessionDataString, { expires, httpOnly: true });
-    return 200;
+        const session = {
+            access: response.data.token.access_token,
+            refresh: response.data.token.refresh_token,
+        };
+
+        const sessionDataString = JSON.stringify(session);
+        cookies().set('session', sessionDataString, { expires, httpOnly: true });
+        return 200;
+    } catch (error) {
+        if (axios.isAxiosError(error)) {
+            console.error('Axios error:', error.message);
+            return error.status;
+        } else {
+            console.error('Unexpected error:', error);
+        }
+        throw error;
+    }
 }
 
 export async function logout() {

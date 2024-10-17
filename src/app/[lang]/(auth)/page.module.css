@@ -1,0 +1,17 @@
+.login {
+    display: flex;
+    background-color: var(--background);
+    justify-content: center;
+    align-content: center;
+    height: 100vh;
+    width: 100%;
+}
+
+.login h1 {
+    text-align: center;
+    line-height: 1.75;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+}

@@ -16,7 +16,7 @@ import { getUserStatus, getUserInfo } from '@/lib/auth';
 
 const getPopularRouts = async (lang: Locale) => {
     try {
-        const response = await axios.get(`${process.env.NEXT_PUBLIC_BACk_URL}/rout/popular`);
+        const response = await axios.get(`${process.env.NEXT_PUBLIC_BACK_URL}rout/popular`);
 
         if (response.status === 200) {
             return response.data.data.result;
@@ -28,7 +28,7 @@ const getPopularRouts = async (lang: Locale) => {
 
 const getContact = async (lang: Locale) => {
     try {
-        const response = await axios.get(`${process.env.NEXT_PUBLIC_BACK_URL}/contact/socials/`);
+        const response = await axios.get(`${process.env.NEXT_PUBLIC_BACK_URL}contact/socials/`);
 
         if (response.status === 200) {
             return response.data.data.result;
@@ -53,6 +53,7 @@ export default async function PublicLayout({
 
     const popularRouts = await getPopularRouts(lang);
     const contacts = await getContact(lang);
+    console.log(contacts);
     const user = await getUserInfo();
     const user_status = await getUserStatus();
 
@@ -61,7 +62,7 @@ export default async function PublicLayout({
             <NavBar
                 staticData={header}
                 lang={lang}
-                contacts={contacts[0].contacts}
+                contacts={contacts[0]?.contacts}
                 user_email={user?.email}
                 user_status={user_status}
             />
@@ -72,7 +73,7 @@ export default async function PublicLayout({
                 {popularRouts && <Popular staticData={popular} popularRouts={popularRouts} />}
             </main>
 
-            <Footer staticData={footer} lang={lang} contacts={contacts[0].contacts} />
+            <Footer staticData={footer} lang={lang} contacts={contacts[0]?.contacts} />
         </>
     );
 }
